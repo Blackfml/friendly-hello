@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import {
-  Album, ArrowDown, AudioLines, ChevronDown, CircleHelp, Clock3, Compass,
+  ArrowDown, AudioLines, ChevronDown, CircleHelp, Clock3,
   Disc3, Heart, Home, Library, ListMusic, Menu, Mic2, MoreHorizontal,
   Music2, Pause, Play, Plus, Search, Settings2, Shuffle, SkipBack,
   SkipForward, Sparkles, Volume2, X,
