@@ -19,9 +19,9 @@ Cliente web independente para explorar o catálogo oficial do Spotify com uma in
    - `VITE_SPOTIFY_CLIENT_ID`
    - `VITE_SPOTIFY_REDIRECT_URI`
 4. Cadastre exatamente o mesmo valor de `VITE_SPOTIFY_REDIRECT_URI` na lista **Redirect URIs** do app Spotify. Esquema, domínio, porta e barra final precisam coincidir.
-5. Reinicie a prévia/dev server depois de configurar as variáveis.
+5. Reinicie a prévia/dev server depois de configurar as variáveis. Para desenvolvimento local, use um loopback explícito como `http://127.0.0.1:5173` (ajuste a porta conforme o projeto); o Spotify não aceita `localhost` como Redirect URI. Para a versão publicada, use a URL HTTPS real da aplicação.
 
-No Lovable, configure essas variáveis em **Project settings / Environment variables** (o nome do menu pode variar), e registre a URL pública da prévia como Redirect URI no painel Spotify.
+No Lovable, configure essas variáveis em **Project settings / Environment variables** (o nome do menu pode variar), e registre a URL HTTPS exata da prévia/publicação como Redirect URI no painel Spotify. O botão “Entrar com Spotify” redireciona diretamente para a página oficial de autorização do Spotify; o Friendly Hello não coleta sua senha.
 
 ## Limites importantes do Spotify
 
