@@ -48,7 +48,7 @@ function SpotifyCompanion() {
         const saved = await getSavedSpotifyTracks();
         if (!active) return;
         setSavedTracks(saved);
-        const initial = await searchSpotifyTracks("genre:pop");
+        const initial = await searchSpotifyTracks("pop");
         if (!active) return;
         setTracks(initial);
       } catch (e) {
@@ -92,7 +92,7 @@ function SpotifyCompanion() {
     }
     if (next === "Início" && connected && !query) {
       setLoading(true);
-      searchSpotifyTracks("genre:pop").then(setTracks).catch((e: unknown) => setError(e instanceof Error ? e.message : "Não foi possível carregar o catálogo.")).finally(() => setLoading(false));
+      searchSpotifyTracks("pop").then(setTracks).catch((e: unknown) => setError(e instanceof Error ? e.message : "Não foi possível carregar o catálogo.")).finally(() => setLoading(false));
     }
   };
 
@@ -146,7 +146,7 @@ function SpotifyCompanion() {
         <header className="topbar"><div className="topbar-left"><button className="icon-btn mobile-menu-btn" onClick={() => setMobileMenu(true)} aria-label="Abrir menu"><Menu size={21}/></button><button className="history-btn" aria-label="Início" onClick={() => chooseSection("Início")}>‹</button><button className="history-btn" aria-label="Pesquisa" onClick={() => chooseSection("Pesquisa")}>›</button><div className="mobile-brand"><AudioLines size={20}/> friendlyhello</div></div><div className="topbar-actions"><span className="preview-pill"><span/> {connected ? "SPOTIFY CONECTADO" : "CATÁLOGO OFICIAL"}</span><button className="help-btn" onClick={() => setNotice("Friendly Hello é um cliente independente. As faixas e capas exibidas após a conexão vêm da API oficial do Spotify.")}><CircleHelp size={18}/><span>Ajuda</span></button>{connected ? <button className="login-btn" onClick={disconnect}>Sair</button> : <button className="login-btn" onClick={connect}>Entrar com Spotify</button>}</div></header>
         <div className="page-scroll">
           <section className="welcome-row"><div><p className="eyebrow"><span className="live-dot"/>{connected ? "CONECTADO AO SPOTIFY" : "SEM MÚSICAS FICTÍCIAS"}</p><h1>{pageTitle}</h1><p className="welcome-copy">{section === "Início" ? "Busque o catálogo oficial e encontre suas músicas favoritas." : section === "Pesquisa" ? "Pesquise faixas reais, artistas e álbuns no Spotify." : "As músicas salvas diretamente na sua conta Spotify."}</p></div><div className="welcome-orb"><div className="orb-ring ring-one"/><div className="orb-ring ring-two"/><AudioLines size={43}/><span className="orb-spark spark-a">✳</span><span className="orb-spark spark-b">✦</span></div></section>
-          <div className="search-wrap"><Search size={20}/><input id="music-search" value={query} onChange={e => {setQuery(e.target.value); setSection("Pesquisa");}} placeholder="Buscar músicas, artistas e álbuns no Spotify" aria-label="Buscar músicas, artistas e álbuns"/>{query && <button className="icon-btn" onClick={() => {setQuery(""); setSection("Início"); if (connected) {setLoading(true); searchSpotifyTracks("genre:pop").then(setTracks).catch((e: unknown) => setError(e instanceof Error ? e.message : "Não foi possível carregar o catálogo.")).finally(() => setLoading(false));}}} aria-label="Limpar pesquisa"><X size={17}/></button>}<kbd>Spotify</kbd></div>
+          <div className="search-wrap"><Search size={20}/><input id="music-search" value={query} onChange={e => {setQuery(e.target.value); setSection("Pesquisa");}} placeholder="Buscar músicas, artistas e álbuns no Spotify" aria-label="Buscar músicas, artistas e álbuns"/>{query && <button className="icon-btn" onClick={() => {setQuery(""); setSection("Início"); if (connected) {setLoading(true); searchSpotifyTracks("pop").then(setTracks).catch((e: unknown) => setError(e instanceof Error ? e.message : "Não foi possível carregar o catálogo.")).finally(() => setLoading(false));}}} aria-label="Limpar pesquisa"><X size={17}/></button>}<kbd>Spotify</kbd></div>
           {notice && <div className="notice-banner"><span><Sparkles size={17}/>{notice}</span><button onClick={() => setNotice("")} aria-label="Fechar aviso"><X size={17}/></button></div>}
           {error && <div className="notice-banner error-banner"><span>{error}</span><button onClick={() => setError("")} aria-label="Fechar erro"><X size={17}/></button></div>}
           {!spotifyConfigured && <section className="connect-required"><div className="connect-required-icon"><Music2 size={28}/></div><h2>Conecte o catálogo oficial</h2><p>O app já está preparado para buscar músicas reais, capas originais e dados da sua biblioteca. Falta cadastrar o Client ID do Spotify no ambiente do projeto.</p><button className="login-btn" onClick={connect}>Configurar conexão</button><small>Não exibimos músicas de exemplo nem capas aleatórias.</small></section>}
